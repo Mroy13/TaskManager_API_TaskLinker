@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Task,{
+        foreignKey:'AssignedTo',
+        onDelete:'CASCADE'
+      });
+
+      this.hasMany(models.Task,{
+        foreignKey:'AssignedBy',
+        onDelete:'CASCADE'
+      });
+
     }
   }
   User.init({
