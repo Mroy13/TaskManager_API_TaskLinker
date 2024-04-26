@@ -1,3 +1,3 @@
 module.exports={
-    modelnameRepository:require('./reponame-repository')
+    userRepository:require('./user-repository')
 }

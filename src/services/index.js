@@ -1,3 +1,3 @@
 module.exports={
-    servicenameService:require('./servicename-services')
+    userService:require('./user-service')
 }
