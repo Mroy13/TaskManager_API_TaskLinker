@@ -22,7 +22,43 @@ async function createTask(req,res){
    }
 }
 
+async function findTask(req,res){
+     try{
+        const taskDetails=await taskService.findTask(req.params.id);
+        SuccessResponse.data=taskDetails;
+        res.status(StatusCodes.OK).json(SuccessResponse);
+     }
+     catch(error){
+        ErrorResponse.error=error;
+        res.status(error.statusCode).json(ErrorResponse);
+     }
+}
+async function updateTask(req,res){
+    try{
+       const updateres=await taskService.updateTask(req.params.id,req.body);
+       SuccessResponse.data=updateres;
+       res.status(StatusCodes.OK).json(SuccessResponse);
+    }
+    catch(error){
+       ErrorResponse.error=error;
+       res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+async function removeTask(req,res){
+    try{
+       const removeRes=await taskService.removeTask(req.params.id);
+       SuccessResponse.data=removeRes;
+       res.status(StatusCodes.OK).json(SuccessResponse);
+    }
+    catch(error){
+       ErrorResponse.error=error;
+       res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
 module.exports={
     createTask,
-
+    findTask,
+    updateTask,
+    removeTask
 }
