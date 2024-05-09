@@ -1,12 +1,12 @@
 const StatusCode=require('http-status-codes');
-const {userRepository}=require('../repositories');
+const {taskRepository}=require('../repositories');
 const Apperror=require('../utils/error/App-error');
 
-const UserRepository=new userRepository();
+const TaskRepository=new taskRepository();
 
-async function createUser(data){
+async function createTask(data){
     try{
-        const res=await UserRepository.create(data);
+        const res=await TaskRepository.create(data);
         return res;
     }
     catch(error){
@@ -25,6 +25,6 @@ async function createUser(data){
 
 
 module.exports={
-    createUser,
+    createTask,
 
 }
