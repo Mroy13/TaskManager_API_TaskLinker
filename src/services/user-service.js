@@ -23,8 +23,24 @@ async function createUser(data){
     }
 }
 
+async function getUserSpecificTask(userid){
+    try{
+        const taskDetails=UserRepository.getUserSpecificTask(userid);
+        if(Object.keys(taskDetails).length===0){
+            throw new Apperror("task not found",StatusCode.NOT_FOUND);
+        }
+        else
+        return taskDetails;
+    }
+    catch(error){
+        if(error instanceof Apperror) throw error;
+        throw new Apperror("server side probelem",StatusCode.INTERNAL_SERVER_ERROR);
+    }
+}
+
 
 module.exports={
     createUser,
+    getUserSpecificTask
 
 }
