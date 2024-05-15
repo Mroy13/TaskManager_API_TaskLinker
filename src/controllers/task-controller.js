@@ -56,9 +56,35 @@ async function removeTask(req,res){
     }
 }
 
+async function markTask(req,res){
+   try{
+      const markResponse=await taskService.markTask(req.params.id,req.body.status);
+      SuccessResponse.data=markResponse;
+      res.status(StatusCodes.OK).json(SuccessResponse);
+   }
+   catch(error){
+      ErrorResponse.error=error;
+      res.status(error.statusCode).json(ErrorResponse);
+   }
+}
+async function addTaskResponse(req,res){
+
+   try{
+      const response=await taskService.addTaskResponse(req.params.id,req.body.response);
+      SuccessResponse.data=response;
+      res.status(StatusCodes.OK).json(SuccessResponse);
+   }
+   catch(error){
+      ErrorResponse.error=error;
+      res.status(error.statusCode).json(ErrorResponse);
+   }
+}
+
 module.exports={
     createTask,
     findTask,
     updateTask,
-    removeTask
+    removeTask,
+    markTask,
+    addTaskResponse
 }

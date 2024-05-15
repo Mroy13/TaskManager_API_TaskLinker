@@ -4,6 +4,4 @@ const {userController}=require ('../../controllers');
 const router=express.Router();
  router.post('/signup',userController.createUser);
  router.get('/tasks/:id',userController.getUserSpecificTask);
-// router.get('/',Controller.get);
-// router.get('/:id',Controller.get);
 module.exports=router

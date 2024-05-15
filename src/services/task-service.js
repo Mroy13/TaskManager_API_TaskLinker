@@ -49,6 +49,10 @@ async function updateTask(id,data){
           throw error;
        }
        else{
+         if(error.name=='SequelizeDatabaseError'){
+            const msg=error.message;
+            throw new Apperror(msg,StatusCode.BAD_REQUEST);
+         }
          throw new Apperror("server side problem",StatusCode.INTERNAL_SERVER_ERROR);
        }
     }
@@ -70,6 +74,51 @@ async function removeTask(data){
 }
 
 
+async function markTask(taskId,stat){
+    try{
+         const res=await TaskRepository.markTask(taskId,stat);
+         if(!res){
+            throw new Apperror("task not found",StatusCode.NOT_FOUND);
+         }
+         return 1;
+    }
+    catch(error){
+       if(error instanceof Apperror){
+          throw error;
+       }
+       else{
+        if(error.name=='SequelizeDatabaseError'){
+            const msg=error.message;
+            throw new Apperror(msg,StatusCode.BAD_REQUEST);
+         }
+       throw new Apperror("server side problem",StatusCode.INTERNAL_SERVER_ERROR);
+       }
+    }
+}
+    async function addTaskResponse(taskId,resp){
+        try{
+             const res=await TaskRepository.addTaskResponse(taskId,resp);
+             if(!res){
+                throw new Apperror("task not found",StatusCode.NOT_FOUND);
+             }
+             return res;
+        }
+        catch(error){
+           if(error instanceof Apperror){
+              throw error;
+           }
+           else{
+            if(error.name=='SequelizeDatabaseError'){
+                const msg=error.message;
+                throw new Apperror(msg,StatusCode.BAD_REQUEST);
+             }
+           throw new Apperror("server side problem",StatusCode.INTERNAL_SERVER_ERROR);
+           }
+        }
+}
+
+
+
 
 
 module.exports={
@@ -77,4 +126,6 @@ module.exports={
     findTask,
     updateTask,
     removeTask,
+    markTask,
+    addTaskResponse
 }

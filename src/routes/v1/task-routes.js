@@ -6,6 +6,6 @@ const router=express.Router();
  router.get('/:id',taskController.findTask);
  router.patch('/up/:id',taskController.updateTask);
  router.delete('/remove/:id',taskController.removeTask);
-// router.get('/',Controller.get);
-// router.get('/:id',Controller.get);
+ router.patch('/mark/:id',taskController.markTask);
+ router.patch('/addResponse/:id',taskController.addTaskResponse);
 module.exports=router
