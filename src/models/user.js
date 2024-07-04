@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.Task,{
         foreignKey:'AssignedTo',
+        as: 'tasksAssignedTo',
         onDelete:'CASCADE'
       });
 
       this.hasMany(models.Task,{
         foreignKey:'AssignedBy',
+        as: 'tasksAssignedBy',
         onDelete:'CASCADE'
       });
 

@@ -1,8 +1,8 @@
 const express=require('express');
+const {fileHandlingMiddleware}=require('../../middlewares');
 const {taskController}=require ('../../controllers');
-//const {..Middleware}=require('../../middlewares');
 const router=express.Router();
- router.post('/add',taskController.createTask);
+ router.post('/add',fileHandlingMiddleware.uploadFiles,taskController.createTask);
  router.get('/:id',taskController.findTask);
  router.patch('/up/:id',taskController.updateTask);
  router.delete('/remove/:id',taskController.removeTask);

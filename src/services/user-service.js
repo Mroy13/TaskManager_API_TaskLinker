@@ -25,10 +25,13 @@ async function createUser(data){
 
 async function getUserSpecificTask(userid){
     try{
-        const taskDetails=UserRepository.getUserSpecificTask(userid);
+        const taskDetails=await UserRepository.getUserSpecificTask(userid);
         if(Object.keys(taskDetails).length===0){
             throw new Apperror("task not found",StatusCode.NOT_FOUND);
         }
+        // if(!taskDetails){
+        //     throw new Apperror("task not found",StatusCode.NOT_FOUND);
+        // }
         else
         return taskDetails;
     }

@@ -2,6 +2,8 @@ const { StatusCodes } = require('http-status-codes');
 const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const {taskService}=require('../services');
 
+
+
 async function createTask(req,res){
    try{
        const taskdata=await taskService.createTask({
@@ -12,6 +14,9 @@ async function createTask(req,res){
         AssignedBy:req.body.AssignedBy,
         AssignedTo:req.body.AssignedTo,
         TaskResponse:req.body.TaskResponse
+       },{
+         fileName:req.body.fileName,
+         public_Key:req.body.public_key
        });
        SuccessResponse.data=taskdata;
        res.status(StatusCodes.OK).json(SuccessResponse);
@@ -21,6 +26,8 @@ async function createTask(req,res){
         res.status(error.statusCode).json(ErrorResponse);
    }
 }
+
+
 
 async function findTask(req,res){
      try{
@@ -44,6 +51,8 @@ async function updateTask(req,res){
        res.status(error.statusCode).json(ErrorResponse);
     }
 }
+
+
 async function removeTask(req,res){
     try{
        const removeRes=await taskService.removeTask(req.params.id);
@@ -67,6 +76,8 @@ async function markTask(req,res){
       res.status(error.statusCode).json(ErrorResponse);
    }
 }
+
+
 async function addTaskResponse(req,res){
 
    try{

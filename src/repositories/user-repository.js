@@ -8,9 +8,20 @@ class userRepository extends crudRepository{
     async getUserSpecificTask(userid){
         try{
             const userDetails=await User.findByPk(userid);
-            console.log(userDetails);
-            const taskDetails=await userDetails.getTasks();
+            const taskDetails=await userDetails.getTasksAssignedTo();
             return taskDetails;
+            // const tasksAssignedToUser = await Task.findAll({
+            //     where: { AssignedTo: userid },
+            //     include: [
+            //       {
+            //         model: User,
+            //         as: 'assignedbyUser',  // Fetching details of the user who assigned the task
+            //       }
+            //     ]
+            //   });
+
+              return tasksAssignedToUser;
+              
         }
         catch(error){
             throw error;

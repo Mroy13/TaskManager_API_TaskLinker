@@ -1,4 +1,7 @@
+const taskFilesRepository = require('./taskfiles-repository');
+
 module.exports={
     userRepository:require('./user-repository'),
-    taskRepository:require('./task-repository')
+    taskRepository:require('./task-repository'),
+    taskFilesRepository:require('./taskfiles-repository'),
 }

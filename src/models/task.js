@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:'AssignedBy',
         as: 'assignedbyUser',
       });
+      this.hasMany(models.TaskFile,{
+        foreignKey:'taskId',
+        onDelete:'CASCADE'
+      });
     
     }
   }

@@ -1,12 +1,16 @@
 const StatusCode=require('http-status-codes');
-const {taskRepository}=require('../repositories');
+const {taskRepository,taskFilesRepository}=require('../repositories');
 const Apperror=require('../utils/error/App-error');
 
 const TaskRepository=new taskRepository();
+const TaskFilesRepository=new taskFilesRepository();
 
-async function createTask(data){
+async function createTask(data,fileDetails){
     try{
         const res=await TaskRepository.create(data);
+        fileDetails.taskId=res.id;
+        const taskfileDetails=await TaskFilesRepository.create(fileDetails);
+        res.dataValues.taskFileName=taskfileDetails.fileName;
         return res;
     }
     catch(error){
@@ -40,7 +44,6 @@ async function findTask(data){
 
 async function updateTask(id,data){
     try{
-        console.log(data);
         const res=await TaskRepository.update(id,data);
         return res;
     }
