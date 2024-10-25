@@ -4,12 +4,17 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
 const fs=require('fs');
 const upload=require('../config/multer-config');
 async function uploadFiles(req,res,next){
+
     upload.single('file')(req,res,async(err)=>{
         if(err){
-           // console.log(err);
+            ErrorResponse.message="Unable to upload File"
             res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
         }
+
+        
+       if(req.file==undefined)return next(); // No file provided, proceed to the next middleware
        try{
+         //upload to cloudinary
         const cloudRes=await cloudinary.uploader.upload(req.file.path, {
             resource_type: 'raw',
             folder:'TaskDoc'
@@ -20,7 +25,6 @@ async function uploadFiles(req,res,next){
          next();
        }
        catch(error){
-         //  console.log(error);
            res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
        }
    });

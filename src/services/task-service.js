@@ -9,8 +9,12 @@ async function createTask(data,fileDetails){
     try{
         const res=await TaskRepository.create(data);
         fileDetails.taskId=res.id;
+        
+         //   add fileDetails to DB if preseent
+        if(fileDetails.fileName!=undefined){
         const taskfileDetails=await TaskFilesRepository.create(fileDetails);
         res.dataValues.taskFileName=taskfileDetails.fileName;
+        }
         return res;
     }
     catch(error){

@@ -10,7 +10,6 @@ async function uploadFiles(filePath){
      return cloudRes.secure_url;
     } 
     catch(error){
-        console.log(error);
         throw error;
     }
 

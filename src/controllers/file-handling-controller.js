@@ -7,7 +7,6 @@ async function uploadFile(req,res){
     
     upload.single('file')(req,res,async(err)=>{
          if(err){
-            // console.log(err);
              res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
          }
         try{
@@ -16,7 +15,6 @@ async function uploadFile(req,res){
          res.status(StatusCodes.OK).json(SuccessResponse);
         }
         catch(error){
-           // console.log(error);
             res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
         }
     });
