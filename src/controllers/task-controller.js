@@ -81,7 +81,14 @@ async function markTask(req,res){
 async function addTaskResponse(req,res){
 
    try{
-      const response=await taskService.addTaskResponse(req.params.id,req.body.response);
+      const response=await taskService.addTaskResponse({
+         taskId:req.params.id,
+         response:req.body.response,
+      },
+      {
+         fileName:req.body.fileName,
+         public_Key:req.body.public_key
+       });
       SuccessResponse.data=response;
       res.status(StatusCodes.OK).json(SuccessResponse);
    }

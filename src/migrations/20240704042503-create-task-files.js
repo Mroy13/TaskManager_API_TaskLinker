@@ -20,6 +20,7 @@ module.exports = {
       },
       taskId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
         references:{
           model:'Tasks',
           key:'id'

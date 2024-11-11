@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     } ,
     taskId:{
       type:DataTypes.INTEGER,
+      allowNull:false,
     } ,
     fileType:{
       type: DataTypes.ENUM({
